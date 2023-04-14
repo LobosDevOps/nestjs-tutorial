@@ -1,4 +1,3 @@
-import { log } from 'console';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -68,6 +67,14 @@ export class UsersService {
     return this.userRepository.findOne({
       where: {
         username,
+      },
+    });
+  }
+
+  findUserByUserId(id: number) {
+    return this.userRepository.findOne({
+      where: {
+        id,
       },
     });
   }
