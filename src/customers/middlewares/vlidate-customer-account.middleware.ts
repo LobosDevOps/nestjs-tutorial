@@ -5,9 +5,9 @@ Injectable();
 export class VlidateCustomerAccountMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
     const { vaild } = req.headers;
-    console.log(vaild);
+    // console.log(vaild);
 
-    console.log('VlidateCustomerAccount');
+    // console.log('VlidateCustomerAccount');
     if (vaild) {
       next();
     } else {
