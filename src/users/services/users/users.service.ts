@@ -8,7 +8,6 @@ import { SerializedUser, User } from '../../../users/types';
 import { User as UserEntity } from '../../../typeorm';
 import { edcodePassword } from '../../../utils/bcrypt';
 
-
 @Injectable()
 export class UsersService {
   constructor(
