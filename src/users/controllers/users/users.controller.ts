@@ -12,19 +12,21 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { ParseIntPipe } from '@nestjs/common';
+import { ParseIntPipe, UseGuards } from '@nestjs/common';
 
-import { UsersService } from 'src/users/services/users/users.service';
-import { SerializedUser } from 'src/users/types';
-import { UserNotFoundException } from 'src/users/exceptions/userNotFound.exception';
-import { HttpExceptionFilter } from 'src/users/filters/httpException.filter';
-import { CreateUserDto } from 'src/users/dots/createUser.dto';
+import { UsersService } from '../../../users/services/users/users.service';
+import { SerializedUser } from '../../../users/types';
+import { UserNotFoundException } from '../../../users/exceptions/userNotFound.exception';
+import { HttpExceptionFilter } from '../../../users/filters/httpException.filter';
+import { CreateUserDto } from '../../../users/dots/createUser.dto';
+import { AuthenticatedGuard } from '../../../auth/utils/local-auth-guard';
 
 @Controller('users')
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @UseInterceptors(ClassSerializerInterceptor)
+  @UseGuards(AuthenticatedGuard)
   @Get('')
   getUsers() {
     return this.usersService.getUsers();

@@ -7,7 +7,10 @@ import {
   Session,
 } from '@nestjs/common';
 
-import { LocalAuthGuard } from '../../../auth/utils/local-auth-guard';
+import {
+  AuthenticatedGuard,
+  LocalAuthGuard,
+} from '../../../auth/utils/local-auth-guard';
 
 @Controller('auth')
 export class AuthController {
@@ -21,5 +24,11 @@ export class AuthController {
     console.log(session.id);
     session.authenticated = true;
     return session;
+  }
+
+  @UseGuards(AuthenticatedGuard)
+  @Get('status')
+  async getAuthStatus(@Request() req) {
+    return req.user;
   }
 }
